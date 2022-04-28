@@ -9,6 +9,9 @@
     }
 
     $id = $_SESSION['id'];
+    $fecha = Date("Y-m-d H:i:s");
+    $estado = "Nuevo";
+
 ?>
 
 
@@ -21,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../js/funciones.js"></script>
+    <script src="/RegistroPQR/js/funciones.js"></script>
     <title>Registro de PQR</title>
 </head>
 
@@ -47,16 +50,20 @@
                         <input type="number" name="id" class="form-control" readonly value=<?php echo $id; ?>>
                     </div>
                     <div class="input-group">
+                        <span class="input-group-text col-sm-3">Asunto:</span>
+                        <input type="text" name="asunto" class="form-control" required>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text col-sm-3" id="caracteres">Texto: </span>
+                        <textarea name="texto" id="texto" class="form-control" required maxlength=1000 rows=2 cols=20 onkeyup="cuentaCaracteres()"></textarea>
+                    </div>
+                    <div class="input-group">
                         <span class="input-group-text col-sm-3">Estado:</span>
-                        <input type="text" name="estado" class="form-control" required>
+                        <input type="text" name="estado" class="form-control" required readonly value=<?php echo $estado; ?>>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Creado:</span>
-                        <input type="email" name="date" class="form-control" required>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text col-sm-3">Respuesta hasta el:</span>
-                        <input type="password" name="pass1" id="pass1" class="form-control" required>
+                        <input type="date" name="fecha" class="form-control" required readonly value=<?php echo $fecha; ?> >
                     </div>
                     <hr>
                     <input class="btn btn-primary" id="submit" type="submit" value="Registrarme">

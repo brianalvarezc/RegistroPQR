@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2022 a las 06:58:57
+-- Tiempo de generación: 28-04-2022 a las 14:02:19
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -30,6 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `pqr` (
   `pqr_id` int(10) NOT NULL,
   `pqr_tipo` varchar(10) NOT NULL,
+  `pqr_asunto` varchar(100) NOT NULL,
+  `pqr_texto` varchar(1000) NOT NULL,
   `pqr_usuario_id` int(10) NOT NULL,
   `pqr_estado` varchar(13) NOT NULL,
   `pqr_fecha_creado` datetime NOT NULL,
@@ -58,7 +60,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`usuario_id`, `usuario_nombre`, `usuario_apellido`, `usuario_correo`, `usuario_pass`, `usuario_telefono`, `usuario_admin`) VALUES
 (101010101, 'Prueba', 'Prueba', 'prueba@mail.com', '$2y$10$PMLVvLSlVAwZmHp8gKIoXubOHhsiKUzEiXZjxJgMuaCRbz7pVgEGu', '1234567890', 'No'),
-(1082929825, 'Brian', 'Alvarez', 'brian.alvarez.cuadros@gmail.com', '$2y$10$AOZvrmZ3o9feYhiru873hullY4G1AsoBIbQjIuFfYNHLUozSrQp/q', '3045284003', 'Si');
+(1082929825, 'Brian', 'Alvarez', 'brian.alvarez.cuadros@gmail.com', '$2y$10$AOZvrmZ3o9feYhiru873hullY4G1AsoBIbQjIuFfYNHLUozSrQp/q', '3045284003', 'Si'),
+(1234567890, 'qwerty', 'qwertyqwerty', 'qwerty@mail.com', '$2y$10$tZB41EcVJQzDKyPsJ7lP8.aVy/JXbR4dEh4x4YTVU.PPqhCB4mL2O', '12345678', 'No');
 
 --
 -- Índices para tablas volcadas

@@ -1,40 +1,46 @@
 <?php
 
-
 session_start();
+
 require_once("../Controladores/conexionBD.php");
 
 if(isset($_SESSION['user']) && isset($_SESSION['id'])){
 
     $user = $_SESSION['user'];
     $id = $_SESSION['id'];
+
     if($_SESSION['admin'] == "No"){
-        $query = $conexion->prepare("SELECT * FROM pqr WHERE usuario_id = ?");
+        $query = $conexion->prepare("SELECT * FROM pqr WHERE pqr_usuario_id = ?");
         $query->bind_param("i", $id);
     }else{
         $query = $conexion->prepare("SELECT * FROM pqr");
     }
+    $query->execute();
+    $result = $query->get_result();
 }
 else{
     header("Location: ../index.php");
 }
 
-$query = $conexion->prepare();
-$query->bind_param("s", $usuario_id);
-$pass = $_POST['pass'];
-
-$query->execute();
-
-$result = $query->get_result();
-
+// obteniendo los datos
 while($row = $result->fetch_array()){
     $rows[] = $row;
 }
 
 foreach ($rows as $fila) {
-    $hash = $fila['usuario_pass'];
-    $usuario_nombre = $fila['usuario_nombre'];
-    $admin = $fila['usuario_admin'];
+    $pqr_id = $fila['pqr_id'];
+    $pqr_tipo = $fila['pqr_tipo'];
+    $pqr_usuario_id = $fila['pqr_usuario_id'];
+    $pqr_estado = $fila['pqr_estado'];
+    $pqr_fecha_creado = $fila['pqr_fecha_creado'];
+    $pqr_fecha_limite = $fila['pqr_fecha_limite'];
+
+    echo $pqr_id;
+    echo $pqr_tipo;
+    echo $pqr_usuario_id;
+    echo $pqr_estado;
+    echo $pqr_fecha_creado;
+    echo $pqr_fecha_limite;
 }
 
 ?>

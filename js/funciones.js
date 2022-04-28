@@ -19,3 +19,10 @@ function validarPass(){
     }
     
 }
+
+function cuentaCaracteres(){
+    let textarea, caracteres;
+
+    textarea = document.getElementById("texto").value;
+    caracteres = document.getElementById("caracteres").innerHTML = "Texto: (" + textarea.length + "/1000)";
+}
