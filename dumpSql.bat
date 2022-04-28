@@ -1,0 +1,1 @@
+mysqldump -u root -p registro_pqr > C:\xampp\htdocs\RegistroPQR\registro_pqr.sql
