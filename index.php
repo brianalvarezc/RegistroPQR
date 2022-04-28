@@ -12,10 +12,10 @@
     <div class="container">
         <div class="row justify-content-center my-4">
             <div class="col-sm-4">
-                <form action="" method="post">
+                <form action="./Controladores/router.php" method="post">
                     <h3>Iniciar Sesi&oacute;n</h3>
                     Usuario:
-                    <input class="form-control" type="email" name="email" id="email" required placeholder="Email registrado">
+                    <input class="form-control" type="number" name="id" id="id" required placeholder="Identificaci&oacute;n registrada">
                     Password:
                     <input class="form-control" type="password" name="pass" id="pass" required>
                     <hr>

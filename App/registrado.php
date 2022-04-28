@@ -8,8 +8,10 @@
     $apellido = $_POST['apellido'];
     $mail = $_POST['mail'];
     $telefono = $_POST['telefono'];
+    $pass = $_POST['pass1'] == $_POST['pass2']? password_hash($_POST['pass1'], PASSWORD_DEFAULT) : null;
+    $admin = "No";
 
-    $usuario = new Usuario($id,$nombre,$apellido,$mail,$telefono);
+    $usuario = new Usuario($id,$nombre,$apellido,$mail,$pass,$telefono,$admin);
 
     $resultado = $usuario->crear();
 ?>

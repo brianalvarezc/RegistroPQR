@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="../js/funciones.js"></script>
     <title>Registro de Usuario</title>
 </head>
 
@@ -35,18 +36,18 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Contrase&ntilde;a:</span>
-                        <input type="email" name="pass1" id="pass1 class="form-control" required>
+                        <input type="password" name="pass1" id="pass1" class="form-control" required onkeyup="validarPass()">
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Confirme Contrase&ntilde;a:</span>
-                        <input type="email" name="pass2" id="pass2 class="form-control" required>
+                        <input type="password" name="pass2" id="pass2" class="form-control" required onkeyup="validarPass()">
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Tel&eacute;fono</span>
                         <input type="number" name="telefono" min="9999" max="9999999999" class="form-control" required>
                     </div>
                     <hr>
-                    <input class="btn btn-primary" type="submit" value="Registrarme">
+                    <input class="btn btn-primary" id="submit" type="submit" value="Registrarme">
                     <input class="btn btn-warning" type="button" value="Cancelar" onclick="window.location='../index.php'">
                 </form>
             </div>
