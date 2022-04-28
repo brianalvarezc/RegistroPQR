@@ -25,14 +25,15 @@ DROP TABLE IF EXISTS `pqr`;
 CREATE TABLE `pqr` (
   `pqr_id` int(10) NOT NULL AUTO_INCREMENT,
   `pqr_tipo` varchar(10) NOT NULL,
+  `pqr_asunto` varchar(100) NOT NULL,
+  `pqr_texto` varchar(1000) NOT NULL,
   `pqr_usuario_id` int(10) NOT NULL,
   `pqr_estado` varchar(13) NOT NULL,
   `pqr_fecha_creado` datetime NOT NULL,
   `pqr_fecha_limite` datetime NOT NULL,
   PRIMARY KEY (`pqr_id`),
-  KEY `pqr_usuario_id` (`pqr_usuario_id`),
-  CONSTRAINT `pqr_ibfk_1` FOREIGN KEY (`pqr_usuario_id`) REFERENCES `usuarios` (`usuario_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `pqr_usuario_id` (`pqr_usuario_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +42,7 @@ CREATE TABLE `pqr` (
 
 LOCK TABLES `pqr` WRITE;
 /*!40000 ALTER TABLE `pqr` DISABLE KEYS */;
+INSERT INTO `pqr` VALUES (5,'q','Relamacion taltalta','Relamacion taltaltaRelamacion ',101010101,'Nuevo','2022-04-28 00:00:00','2022-05-05 00:00:00'),(6,'q','dfesf','ffdfsefffffffffffffffffffffffffffffffffffffffffffff',1082929825,'Nuevo','0000-00-00 00:00:00','2022-04-28 02:40:00');
 /*!40000 ALTER TABLE `pqr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +58,9 @@ CREATE TABLE `usuarios` (
   `usuario_nombre` varchar(30) NOT NULL,
   `usuario_apellido` varchar(30) NOT NULL,
   `usuario_correo` varchar(100) NOT NULL,
+  `usuario_pass` varchar(100) NOT NULL,
   `usuario_telefono` varchar(10) NOT NULL,
+  `usuario_admin` varchar(2) NOT NULL,
   PRIMARY KEY (`usuario_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,7 +71,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (34543,'fesgrdhndbs','dadwadw','adfesdhfyj@fgrh','565432'),(765444,'Brian','adsgnfjhtdgsdvz','brian.alvarez.cuadros@gmail.com','123123123'),(23456522,'Brian','Alvarez','brian.alvarez.cuadros@gmail.com','234567543'),(23456543,'fesgrdhndbs','dfsgrdbfv','brian.alvarez.cuadros@gmail.com','3456788888'),(34567876,'bfnhjm,kjggfds','adsgnfjhtdgsdvz','asddhtgsdfv@d','1111111'),(123456765,'Brian Aurelio','Alvarez Cuadros','brian.alvarez.cuadros@gmail.com','3045284003'),(345676554,'Brian','Alvarez Cuadros','brian.alvarez.cuadros@gmail.com','456756543'),(1234567654,'Brian Aurelio','Alvarez Cuadros','brian.alvarez.cuadros@gmail.com','3045284003'),(2147483647,'bfnhjm,kjggfds','adsgnfjhtdgsdvz','asddhtgsdfv@d','1111111');
+INSERT INTO `usuarios` VALUES (101010101,'Prueba','Prueba','prueba@mail.com','$2y$10$PMLVvLSlVAwZmHp8gKIoXubOHhsiKUzEiXZjxJgMuaCRbz7pVgEGu','1234567890','No'),(1082929825,'Brian','Alvarez','brian.alvarez.cuadros@gmail.com','$2y$10$AOZvrmZ3o9feYhiru873hullY4G1AsoBIbQjIuFfYNHLUozSrQp/q','3045284003','Si'),(1234567890,'qwerty','qwertyqwerty','qwerty@mail.com','$2y$10$tZB41EcVJQzDKyPsJ7lP8.aVy/JXbR4dEh4x4YTVU.PPqhCB4mL2O','12345678','No');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -80,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-28  8:35:03
+-- Dump completed on 2022-04-28 18:08:36

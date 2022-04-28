@@ -2,49 +2,29 @@
 
 session_start();
 
+require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/pqrs.php");
 require_once("../Controladores/conexionBD.php");
 
+// Si se ha iniciado sesion se puede continuar
 if(isset($_SESSION['user']) && isset($_SESSION['id'])){
 
     $user = $_SESSION['user'];
-    $id = $_SESSION['id'];
-
+    $pqr_usuario_id = $_SESSION['id'];
+    
+    // creando el objeto para usar su metodos
+    $pqr = new Pqr(null, null, null,$pqr_usuario_id,null ,null ,null);
+    
+    // Condicion para mostrar todos si es admin o los propios si es usuario
     if($_SESSION['admin'] == "No"){
-        $query = $conexion->prepare("SELECT * FROM pqr WHERE pqr_usuario_id = ?");
-        $query->bind_param("i", $id);
+        $rows = $pqr->buscar_pqrs();
     }else{
-        $query = $conexion->prepare("SELECT * FROM pqr");
+        $rows = $pqr->buscar_todas_pqrs();
     }
-    $query->execute();
-    $result = $query->get_result();
 }
 else{
-    header("Location: ../index.php");
+    header("Location: /RegistroPQR/");
 }
-
-// obteniendo los datos
-while($row = $result->fetch_array()){
-    $rows[] = $row;
-}
-
-foreach ($rows as $fila) {
-    $pqr_id = $fila['pqr_id'];
-    $pqr_tipo = $fila['pqr_tipo'];
-    $pqr_usuario_id = $fila['pqr_usuario_id'];
-    $pqr_estado = $fila['pqr_estado'];
-    $pqr_fecha_creado = $fila['pqr_fecha_creado'];
-    $pqr_fecha_limite = $fila['pqr_fecha_limite'];
-
-    echo $pqr_id;
-    echo $pqr_tipo;
-    echo $pqr_usuario_id;
-    echo $pqr_estado;
-    echo $pqr_fecha_creado;
-    echo $pqr_fecha_limite;
-}
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,15 +45,65 @@ foreach ($rows as $fila) {
 
 
     <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            </tr>
+        <a href="/RegistroPQR/App/pqr/nueva_pqr.php">
+            <button class="btn btn-primary">+ Nueva PQR</button>
+        </a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>pqr_id</th>
+                    <th>pqr_tipo</th>
+                    <th>pqr_asunto</th>
+                    <th>pqr_texto</th>
+                    <th>pqr_usuario_id</th>
+                    <th>pqr_estado</th>
+                    <th>pqr_fecha_creado</th>
+                    <th>pqr_fecha_limite</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php 
+                foreach ($rows as $fila) {
+                    $pqr_id = $fila['pqr_id'];
+                    $pqr_tipo = $fila['pqr_tipo'];
+                    $pqr_asunto = $fila['pqr_asunto'];
+                    $pqr_texto = $fila['pqr_texto'];
+                    $pqr_usuario_id = $fila['pqr_usuario_id'];
+                    $pqr_estado = $fila['pqr_estado'];
+                    $pqr_fecha_creado = $fila['pqr_fecha_creado'];
+                    $pqr_fecha_limite = $fila['pqr_fecha_limite'];
+                    
+                    echo "<tr>";
+                    echo "<td>". $pqr_id . "</td>";
+                    echo "<td>". $pqr_tipo . "</td>";
+                    echo "<td>". $pqr_asunto . "</td>";
+                    echo "<td>". $pqr_texto . "</td>";
+                    echo "<td>". $pqr_usuario_id . "</td>";
+                    echo "<td>". $pqr_estado . "</td>";
+                    echo "<td>". $pqr_fecha_creado . "</td>";
+                    echo "<td>". $pqr_fecha_limite . "</td>";
+                    // boton de formulario para editar
+                    echo "<td>
+                        <form action='/RegistroPQR/App/pqr/editar_pqr.php' method='post'>
+                            <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
+                            <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
+                            <input type='submit' class='btn btn-primary' value='Editar'>
+                            </form>
+                            </td>";
+                            
+                            // boton de formulario para borrar
+                            echo "<td>
+                            <form action='/RegistroPQR/App/pqr/borrar_pqr.php' method='post'>
+                            <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
+                            <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
+                            <input type='submit' class='btn btn-danger' value='Borrar'>
+                        </form>
+                    </td>";
+
+                    echo "</tr>";
+                } ?>
         </tbody>
         </table>
     </div>

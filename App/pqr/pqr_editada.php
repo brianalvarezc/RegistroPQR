@@ -1,17 +1,21 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/pqrs.php");
     
-    $pqr_tipo = $_POST['tipo'];
-    $pqr_asunto = $_POST['asunto'];
-    $pqr_texto = $_POST['texto'];
-    $pqr_usuario_id = $_POST['usuario_id'];
-    $pqr_estado = $_POST['estado'];
-    $pqr_fecha = $_POST['fecha'];
-    $pqr_fecha_limite = $_POST['fecha_limite'];
+    $pqr_id = $_POST['pqr_id'];
+    $pqr_tipo = $_POST['pqr_tipo'];
+    $pqr_asunto = $_POST['pqr_asunto'];
+    $pqr_texto = $_POST['pqr_texto'];
+    $pqr_usuario_id = $_POST['pqr_usuario_id'];
+    $pqr_estado = $_POST['pqr_estado'];
+    $pqr_fecha_creado = $_POST['pqr_fecha_creado'];
+    $pqr_fecha_limite = $_POST['pqr_fecha_limite'];
 
-    $pqr = new Pqr($pqr_tipo,$pqr_asunto,$pqr_texto,$pqr_usuario_id,$pqr_estado,$pqr_fecha,$pqr_fecha_limite);
-    $resultado = $pqr->crear();
+    $pqr = new Pqr($pqr_tipo,$pqr_asunto,$pqr_texto,$pqr_usuario_id,$pqr_estado,$pqr_fecha_creado,$pqr_fecha_limite);
+    $pqr->set_id($pqr_id);
+
+    $resultado = $pqr->actualizar();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -22,13 +26,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <title>Registro de PQR</title>
+    <title>Actualizacion de PQR</title>
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center my-4">
             <div class="col-sm-10">
-                <h2>Registro de PQR</h2>
+                <h2>Actualizacion de PQR</h2>
                 <div class="alert alert-success">
                     <h2><?php echo $resultado ?></h2>
                 </div>

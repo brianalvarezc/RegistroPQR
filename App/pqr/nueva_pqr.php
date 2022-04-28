@@ -9,9 +9,12 @@
     }
 
     $id = $_SESSION['id'];
+    date_default_timezone_set("America/Bogota");
     $fecha = Date("Y-m-d H:i:s");
+    $dias = 7;
     $estado = "Nuevo";
-
+    
+    $nuevaFecha = Date("Y-m-d H:i:s", strtotime($fecha . "+" . $dias . " days"));
 ?>
 
 
@@ -29,11 +32,13 @@
 </head>
 
 <body>
+    <!-- navbar -->
     <?php require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/App/navbar.php") ?>
+
     <div class="container">
         <div class="row justify-content-center my-4">
             <div class="col-sm-10">
-                <form action="./registrado.php" method="post">
+                <form action="./pqr_registrada.php" method="post">
                     <h2>Registro de PQR</h2>
                     
                     <div class="input-group">
@@ -47,7 +52,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Id de Usuario:</span>
-                        <input type="number" name="id" class="form-control" readonly value=<?php echo $id; ?>>
+                        <input type="number" name="usuario_id" class="form-control" readonly value=<?php echo $id; ?>>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Asunto:</span>
@@ -63,11 +68,19 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Creado:</span>
-                        <input type="date" name="fecha" class="form-control" required readonly value=<?php echo $fecha; ?> >
+                        <input type="text" name="fecha" class="form-control" required readonly value=<?php echo "'".$fecha."'"; ?> >
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text col-sm-3">Fecha l&iacute;mite:</span>
+                        <input type="text" name="fecha_limite" class="form-control" required readonly value=<?php echo "'".$nuevaFecha."'"; ?> >
                     </div>
                     <hr>
-                    <input class="btn btn-primary" id="submit" type="submit" value="Registrarme">
-                    <input class="btn btn-warning" type="button" value="Cancelar" onclick="window.location='../../'">
+                    <input class="btn btn-primary" id="submit" type="submit" value="Enviar">
+                    <a href="/RegistroPQR/App/manager.php">
+                        <button type="button" class="btn btn-warning">
+                            Volver
+                        </button>
+                    </a>
                 </form>
             </div>
         </div>

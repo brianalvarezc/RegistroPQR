@@ -1,24 +1,19 @@
 <?php
     session_start();
 
-    require_once("./conexionBD.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/Usuarios.php");
 
     // Si viene del login...
     if(isset($_POST['id'])){
         $usuario_id = $_POST['id'];
+        $pass = $_POST['pass'];
     }
 
     // trayendo el hash pass del usuario indicado 
-    $query = $conexion->prepare("SELECT * FROM usuarios WHERE usuario_id = ?");
-    $query->bind_param("s", $usuario_id);
-    $pass = $_POST['pass'];
-    $query->execute();
-    $result = $query->get_result();
+    $usuario = new Usuario($usuario_id, null, null, null, null, null, null);
+    $rows = $usuario->buscar();
+    echo $rows;
 
-    while($row = $result->fetch_array()){
-        $rows[] = $row;
-    }
-    
     foreach ($rows as $fila) {
         $hash = $fila['usuario_pass'];
         $usuario_nombre = $fila['usuario_nombre'];

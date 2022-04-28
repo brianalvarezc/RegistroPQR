@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Controladores/usuarios.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Controladores/usuarios.php");
 
 class Usuario {
 
@@ -35,10 +35,13 @@ class Usuario {
         return crear($this);
     }
     function buscar(){
-        
+        return buscar_usuario($this->usuario_id);
+    }
+    function buscar_todos_usuarios(){
+        return buscar_todos_usuarios();
     }
     function actualizar(){
-        
+        return actualizar_usuario($this);
     }
     function borrar(){
         
