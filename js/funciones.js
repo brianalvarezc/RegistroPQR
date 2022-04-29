@@ -11,11 +11,12 @@ function validarPass(){
     if(pass1 != pass2){
         pass1 = null;
         pass2 = null;
-        // console.log("Contraseñas diferentes");
+        console.log("Contraseñas diferentes");
         boton.disabled = true;
     }
     else{
         boton.disabled = false;
+        console.log("Contraseñas iguales");
     }
     
 }
