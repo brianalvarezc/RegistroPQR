@@ -15,6 +15,37 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarios` (
+  `usuario_id` int(10) NOT NULL,
+  `usuario_nombre` varchar(30) NOT NULL,
+  `usuario_apellido` varchar(30) NOT NULL,
+  `usuario_correo` varchar(100) NOT NULL,
+  `usuario_pass` varchar(100) NOT NULL,
+  `usuario_telefono` varchar(10) NOT NULL,
+  `usuario_admin` varchar(2) NOT NULL,
+  PRIMARY KEY (`usuario_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (202020202,'qwerty','qwertyqwerty','qwerty@mail.com','$2y$10$pRKPHdllQkvqWg5NjO0d2.bHyLf1lDUiz.bDSCw/J2UNqaNPCZBS.','12345678','No'),(1082929825,'Brian','Alvarez','prueba@mail.com','$2y$10$b8kHS5wMhtbYQjJ9D6y.Xe43zU66pZRK2V6Z1Y7BHBlPtcUAio3zW','1234567890','Si'),(1103106195,'Kezia','Mercado','keziamercado@hotmail.com','$2y$10$uttyoEjeC/MGuEupnoel6OvtqCEDTJNg4VLKFkSSPPwSGohcssO3.','3012455761','No');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 --
 -- Table structure for table `pqr`
 --
@@ -47,35 +78,6 @@ INSERT INTO `pqr` VALUES (11,'q','Queja sobre blablabla','Yo Brian me quejo por 
 /*!40000 ALTER TABLE `pqr` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `usuarios`
---
-
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `usuario_id` int(10) NOT NULL,
-  `usuario_nombre` varchar(30) NOT NULL,
-  `usuario_apellido` varchar(30) NOT NULL,
-  `usuario_correo` varchar(100) NOT NULL,
-  `usuario_pass` varchar(100) NOT NULL,
-  `usuario_telefono` varchar(10) NOT NULL,
-  `usuario_admin` varchar(2) NOT NULL,
-  PRIMARY KEY (`usuario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios`
---
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (202020202,'qwerty','qwertyqwerty','qwerty@mail.com','$2y$10$pRKPHdllQkvqWg5NjO0d2.bHyLf1lDUiz.bDSCw/J2UNqaNPCZBS.','12345678','No'),(1082929825,'Brian','Alvarez','prueba@mail.com','$2y$10$b8kHS5wMhtbYQjJ9D6y.Xe43zU66pZRK2V6Z1Y7BHBlPtcUAio3zW','1234567890','Si'),(1103106195,'Kezia','Mercado','keziamercado@hotmail.com','$2y$10$uttyoEjeC/MGuEupnoel6OvtqCEDTJNg4VLKFkSSPPwSGohcssO3.','3012455761','No');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
