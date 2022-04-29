@@ -17,8 +17,14 @@ if(isset($_SESSION['user']) && isset($_SESSION['id'])){
     // Condicion para mostrar todos si es admin o los propios si es usuario
     if($_SESSION['admin'] == "No"){
         $rows = $pqr->buscar_pqrs();
+        $boton_eliminar = "";
+        $boton_editar = "";
+        $th_eliminar = "";
+        $th_editar = "";
     }else{
         $rows = $pqr->buscar_todas_pqrs();
+        $th_eliminar = "<th>pqr_eliminar</th>";
+        $th_editar = "<th>pqr_editar</th>";
     }
 }
 else{
@@ -59,12 +65,13 @@ else{
                     <th>pqr_estado</th>
                     <th>pqr_fecha_creado</th>
                     <th>pqr_fecha_limite</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <?php echo $th_editar ?>
+                    <?php echo $th_eliminar ?>
                 </tr>
             </thead>
             <tbody>
             <?php 
+            if($rows != null){
                 foreach ($rows as $fila) {
                     $pqr_id = $fila['pqr_id'];
                     $pqr_tipo = $fila['pqr_tipo'];
@@ -85,25 +92,35 @@ else{
                     echo "<td>". $pqr_fecha_creado . "</td>";
                     echo "<td>". $pqr_fecha_limite . "</td>";
                     // boton de formulario para editar
-                    echo "<td>
-                        <form action='/RegistroPQR/App/pqr/editar_pqr.php' method='post'>
-                            <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
-                            <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
-                            <input type='submit' class='btn btn-primary' value='Editar'>
-                            </form>
-                            </td>";
+                    if($_SESSION['admin'] == "Si"){
+
+                        $boton_eliminar = "<td>
+                                            <form action='/RegistroPQR/App/pqr/borrar_pqr.php' method='post'>
+                                                <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
+                                                <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
+                                                <input type='submit' class='btn btn-danger' value='Borrar'>
+                                            </form>
+                                        </td>";
+                        $boton_editar = "<td>
+                                            <form action='/RegistroPQR/App/pqr/editar_pqr.php' method='post'>
+                                                <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
+                                                <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
+                                                <input type='submit' class='btn btn-primary' value='Editar'>
+                                            </form>
+                                        </td>";
+                    }
+                    echo $boton_editar;
                             
                             // boton de formulario para borrar
-                            echo "<td>
-                            <form action='/RegistroPQR/App/pqr/borrar_pqr.php' method='post'>
-                            <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
-                            <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
-                            <input type='submit' class='btn btn-danger' value='Borrar'>
-                        </form>
-                    </td>";
+                    echo $boton_eliminar;
 
                     echo "</tr>";
-                } ?>
+                }
+            }
+            else{
+                echo "<tr><td colspan=6><h3>No tienes PQRs registradas a tu nombre</h3><td><tr>";
+            }
+                 ?>
         </tbody>
         </table>
     </div>

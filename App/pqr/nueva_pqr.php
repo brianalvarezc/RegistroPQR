@@ -11,10 +11,7 @@
     $id = $_SESSION['id'];
     date_default_timezone_set("America/Bogota");
     $fecha = Date("Y-m-d H:i:s");
-    $dias = 7;
     $estado = "Nuevo";
-    
-    $nuevaFecha = Date("Y-m-d H:i:s", strtotime($fecha . "+" . $dias . " days"));
 ?>
 
 
@@ -69,10 +66,6 @@
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Creado:</span>
                         <input type="text" name="fecha" class="form-control" required readonly value=<?php echo "'".$fecha."'"; ?> >
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text col-sm-3">Fecha l&iacute;mite:</span>
-                        <input type="text" name="fecha_limite" class="form-control" required readonly value=<?php echo "'".$nuevaFecha."'"; ?> >
                     </div>
                     <hr>
                     <input class="btn btn-primary" id="submit" type="submit" value="Enviar">

@@ -59,6 +59,7 @@ function buscar_pqrs($pqr_usuario_id){
     $pqr_usuario_id = $pqr_usuario_id;
 
     // trayendo los datos de la BD
+    $rows = null;
     $query = $conexion->prepare("SELECT * FROM pqr WHERE pqr_usuario_id = ?;");
     $query->bind_param("i", $pqr_usuario_id);
     try {

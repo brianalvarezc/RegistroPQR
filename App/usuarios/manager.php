@@ -18,11 +18,20 @@ if(isset($_SESSION['user']) && isset($_SESSION['id'])){
     if($_SESSION['admin'] == "No"){
         $rows = $usuario->buscar();
         $boton = "";
+        $boton_eliminar = "";
+        $th_eliminar = "";
     }else{
         $rows = $usuario->buscar_todos_usuarios();
         $boton = '  <a href="/RegistroPQR/App/Usuarios/nuevo_usuario.php">
                         <button class="btn btn-primary">+ Nuevo Usuario</button>
                     </a>';
+        $boton_eliminar = "<td>
+                            <form action='/RegistroPQR/App/usuarios/borrar_usuario.php' method='post'>
+                                <input type='hidden' name='usuario_id' id='usuario_id' value='".$usuario_id."'>
+                                <input type='submit' class='btn btn-danger' value='Borrar'>
+                            </form>
+                            </td>";
+        $th_eliminar = "<th>Eliminar</th>";
     }
 }
 else{
@@ -62,7 +71,7 @@ else{
                     <th>usuario_telefono</th>
                     <th>usuario_admin</th>
                     <th>Editar</th>
-                    <th>Eliminar</th>
+                    <?php echo $th_eliminar; ?>
                 </tr>
             </thead>
             <tbody>
@@ -81,7 +90,6 @@ else{
                     echo "<td>". $usuario_nombre . "</td>";
                     echo "<td>". $usuario_apellido . "</td>";
                     echo "<td>". $usuario_correo . "</td>";
-                    // echo "<td>". $usuario_pass . "</td>";
                     echo "<td>". $usuario_telefono . "</td>";
                     echo "<td>". $usuario_admin . "</td>";
                     
@@ -94,12 +102,7 @@ else{
                             </td>";
                             
                             // boton de formulario para borrar
-                            echo "<td>
-                            <form action='/RegistroPQR/App/usuarios/borrar_usuario.php' method='post'>
-                            <input type='hidden' name='usuario_id' id='usuario_id' value='".$usuario_id."'>
-                            <input type='submit' class='btn btn-danger' value='Borrar'>
-                        </form>
-                    </td>";
+                            echo $boton_eliminar;
 
                     echo "</tr>";
                 } ?>

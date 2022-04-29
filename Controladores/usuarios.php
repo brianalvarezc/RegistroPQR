@@ -79,7 +79,7 @@ function actualizar_usuario(Usuario $usuario){
     $sql = "UPDATE usuarios SET usuario_nombre = ?, usuario_apellido = ?, usuario_correo = ?, usuario_pass = ?, usuario_telefono = ?, usuario_admin = ? WHERE usuario_id = ?;";
     
     $query = $conexion->prepare($sql);
-    $query->bind_param("", $usuario_nombre, $usuario_apellido, $usuario_correo, $usuario_pass, $usuario_telefono, $usuario_admin, $usuario_id);
+    $query->bind_param("ssssisi", $usuario_nombre, $usuario_apellido, $usuario_correo, $usuario_pass, $usuario_telefono, $usuario_admin, $usuario_id);
 
     $resultado = "";
     try {

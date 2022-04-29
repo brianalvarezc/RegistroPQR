@@ -6,25 +6,29 @@ session_start();
 // Verificacion del usuario
 if(isset($_SESSION['user'])){
     
-    // verificacion del formulario
-    if(isset($_POST['usuario_id'])){
-
-        $usuario_id = $_POST['usuario_id'];
-
-        $usuario = new Usuario($usuario_id, null, null, null, null, null, null);
-        $rows = $usuario->buscar();
-
-        // obteniendo los valores
-        foreach ($rows as $fila) {
-            $usuario_id = $fila['usuario_id'];
-            $usuario_nombre = $fila['usuario_nombre'];
-            $usuario_apellido = $fila['usuario_apellido'];
-            $usuario_correo = $fila['usuario_correo'];
-            $usuario_pass = $fila['usuario_pass'];
-            $usuario_telefono = $fila['usuario_telefono'];
-            $usuario_admin = $fila['usuario_admin'];
+    if($_SESSION['admin'] == "Si"){
+        // verificacion del formulario
+        if(isset($_POST['usuario_id'])){
+            $usuario_id = $_POST['usuario_id'];
         }
+    }else if($_SESSION['id'] == $_POST["usuario_id"]){
+        $usuario_id = $_SESSION['id'];
+    }else{
+        header("Location: /RegistroPQR/App/usuarios/manager.php");
     }
+    // obteniendo los valores
+    $usuario = new Usuario($usuario_id, null, null, null, null, null, null);
+    $rows = $usuario->buscar();
+    foreach ($rows as $fila) {
+        // $usuario_id = $fila['usuario_id'];
+        $usuario_nombre = $fila['usuario_nombre'];
+        $usuario_apellido = $fila['usuario_apellido'];
+        $usuario_correo = $fila['usuario_correo'];
+        $usuario_pass = $fila['usuario_pass'];
+        $usuario_telefono = $fila['usuario_telefono'];
+        $usuario_admin = $fila['usuario_admin'];
+    }
+
     // Opcion para definir usuarios Administradores
     if($_SESSION['admin'] == "Si"){
         $select = '<div class="input-group">
@@ -68,12 +72,12 @@ else{
     <div class="container">
         <div class="row justify-content-center my-4">
             <div class="col-sm-10">
-                <form action="/RegistropQR/App/usuarios/usuario_editado.php" method="post">
+                <form action="/RegistroPQR/App/usuarios/usuario_editado.php" method="post">
                     <h2>Editar Usuario</h2>
                     
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Identificaci&oacute;n</span>
-                        <input type="number" min="1000" max="9999999999" name="usuario_id" class="form-control" required value=<?php echo "'".$usuario_id."'"; ?>>
+                        <input type="number" name="usuario_id" class="form-control" required readonly value=<?php echo "'".$usuario_id."'"; ?>>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">Nombre:</span>

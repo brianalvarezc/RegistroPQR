@@ -1,29 +1,47 @@
 <?php
 session_start();
-    require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/Usuarios.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/Usuarios.php");
+
+if(isset($_SESSION['user'])){
     
-    if(isset($_SESSION['user'])){
-
+    if($_SESSION['admin'] == "Si"){
         $usuario_id = $_POST['usuario_id'];
-        $usuario_nombre = $_POST['usuario_nombre'];
-        $usuario_apellido = $_POST['usuario_apellido'];
-        $usuario_correo = $_POST['usuario_correo'];
-        $usuario_pass1 = $_POST['usuario_pass1'];
-        $usuario_pass2 = $_POST['usuario_pass2'];
-        $usuario_telefono = $_POST['usuario_telefono'];
-        $usuario_admin = $_POST['usuario_admin'];
-
-        if($usuario_pass1 == $usuario_pass2){
-            $usuario_pass = $usuario_pass1;
-            $usuario = new Usuario($usuario_id,$usuario_nombre,$usuario_apellido,$usuario_correo,$usuario_pass,$usuario_telefono,$usuario_admin);
-            $resultado = $pqr->actualizar();
-        }else{
-            $resultado = "No se ha actualizado, las contrase&ntilde;as no coinciden.";
+        // Verificacion del permiso de Administrador
+        if(isset($_POST['usuario_admin'])){
+            $usuario_admin = $_POST['usuario_admin'];
+        }
+        else{
+            $usuario_admin = "No";
         }
     }
-    else{
-        header("Location: /RegistroPqr/App/usuarios/manager.php");
+    else if($_SESSION['id'] == $_POST["usuario_id"]){
+        $usuario_id = $_SESSION['id'];
+        $usuario_admin = "No";
     }
+    else{
+            header("Location: /RegistroPQR/App/usuarios/manager.php");
+    }
+
+    $usuario_nombre = $_POST['usuario_nombre'];
+    $usuario_apellido = $_POST['usuario_apellido'];
+    $usuario_correo = $_POST['usuario_correo'];
+    $usuario_pass1 = $_POST['usuario_pass1'];
+    $usuario_pass2 = $_POST['usuario_pass2'];
+    $usuario_telefono = $_POST['usuario_telefono'];
+
+
+    // Verificacion backend de las contraseñas iguales
+    if($usuario_pass1 == $usuario_pass2){
+        $usuario_pass = password_hash($usuario_pass1, PASSWORD_DEFAULT);
+        $usuario = new Usuario($usuario_id,$usuario_nombre,$usuario_apellido,$usuario_correo,$usuario_pass,$usuario_telefono,$usuario_admin);
+        $resultado = $usuario->actualizar();
+    }else{
+        $resultado = "No se ha actualizado, las contrase&ntilde;as no coinciden.";
+    }
+}
+else{
+    header("Location: /RegistroPqr/App/usuarios/manager.php");
+}
 ?>
 
 

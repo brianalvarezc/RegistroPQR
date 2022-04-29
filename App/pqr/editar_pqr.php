@@ -66,7 +66,7 @@ else{
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_tipo:</span>
-                        <select class="form-control" name="pqr_tipo" id="pqr_tipo" required>
+                        <select class="form-control" name="pqr_tipo" id="pqr_tipo" required readonly>
                             <option value=<?php echo "'". $pqr_tipo."'";?> selected>PQR(<?php echo $pqr_tipo; ?>)</option>
                             <option value="p">Petici&oacute;n</option>
                             <option value="q">Queja</option>
@@ -75,11 +75,11 @@ else{
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_asunto:</span>
-                        <input type="text" name="pqr_asunto" class="form-control" required value=<?php echo "'". $pqr_asunto."'";?>>
+                        <input type="text" name="pqr_asunto" class="form-control" required readonly value=<?php echo "'". $pqr_asunto."'";?>>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_texto:</span>
-                        <input type="text" name="pqr_texto" class="form-control" required value=<?php echo "'". $pqr_texto . "'";?>>
+                        <input type="text" name="pqr_texto" class="form-control" required readonly value=<?php echo "'". $pqr_texto . "'";?>>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_usuario_id:</span>
@@ -87,7 +87,12 @@ else{
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_estado:</span>
-                        <input type="text" name="pqr_estado" class="form-control" required readonly value=<?php echo "'". $pqr_estado."'";?>>
+                        <select class="form-control" name="pqr_estado" id="pqr_estado" required>
+                            <option value=<?php echo "'". $pqr_estado."'";?> selected><?php echo $pqr_estado; ?></option>
+                            <option value="Nuevo">Nuevo</option>
+                            <option value="Proceso">En proceso</option>
+                            <option value="Cerrado">Cerrado</option>
+                        </select>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_fecha_creado:</span>

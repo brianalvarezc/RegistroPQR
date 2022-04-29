@@ -7,7 +7,21 @@
     $pqr_usuario_id = $_POST['usuario_id'];
     $pqr_estado = $_POST['estado'];
     $pqr_fecha = $_POST['fecha'];
-    $pqr_fecha_limite = $_POST['fecha_limite'];
+
+    switch($pqr_tipo){
+        case "p":
+            $dias = 7;
+            break;
+        case "q":
+            $dias = 3;
+            break;
+        case "r":
+            $dias = 2;
+            break;
+        default:
+            $dias = 7;
+    }
+    $pqr_fecha_limite = Date("Y-m-d H:i:s", strtotime($pqr_fecha . "+" . $dias . " days"));
 
     $pqr = new Pqr($pqr_tipo,$pqr_asunto,$pqr_texto,$pqr_usuario_id,$pqr_estado,$pqr_fecha,$pqr_fecha_limite);
     $resultado = $pqr->crear();
