@@ -44,7 +44,7 @@ class Usuario {
         return actualizar_usuario($this);
     }
     function borrar(){
-        
+        return borrar_usuario($this);
     }
 
     function toString(){

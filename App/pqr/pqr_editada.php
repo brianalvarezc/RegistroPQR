@@ -1,4 +1,5 @@
 <?php
+session_start();
     require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/pqrs.php");
     
     $pqr_id = $_POST['pqr_id'];
@@ -8,11 +9,31 @@
     $pqr_usuario_id = $_POST['pqr_usuario_id'];
     $pqr_estado = $_POST['pqr_estado'];
     $pqr_fecha_creado = $_POST['pqr_fecha_creado'];
-    $pqr_fecha_limite = $_POST['pqr_fecha_limite'];
+    $pqr_fecha_limite = $_POST['pqr_fecha_limite']; 
 
     $pqr = new Pqr($pqr_tipo,$pqr_asunto,$pqr_texto,$pqr_usuario_id,$pqr_estado,$pqr_fecha_creado,$pqr_fecha_limite);
     $pqr->set_id($pqr_id);
 
+    $rows = $pqr->buscar_pqr();
+
+    foreach($rows as $fila){
+        $pqr_estado = $fila['pqr_estado'];
+    }
+
+    if(isset($pqr_estado)){
+        switch ($pqr_estado) {
+            case 'Nuevo':
+                $pqr_estado = "En Proceso";
+                break;
+            case 'Proceso':
+                $pqr_estado = "Cerrado";
+                break;
+            default:
+                $pqr_estado = "Cerrado";
+                break;
+        }
+    }
+    $pqr->set_estado($pqr_estado);
     $resultado = $pqr->actualizar();
 ?>
 
@@ -29,6 +50,10 @@
     <title>Actualizacion de PQR</title>
 </head>
 <body>
+    
+<?php require_once($_SERVER["DOCUMENT_ROOT"]."/RegistroPQR/App/navbar.php") ?>
+    <!-- termina la barra de navegacion -->
+
     <div class="container">
         <div class="row justify-content-center my-4">
             <div class="col-sm-10">

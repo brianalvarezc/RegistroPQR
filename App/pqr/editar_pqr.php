@@ -27,6 +27,17 @@ if(isset($_SESSION['user'])){
             $pqr_fecha_creado = $fila['pqr_fecha_creado'];
             $pqr_fecha_limite = $fila['pqr_fecha_limite'];
         }
+        switch ($pqr_estado) {
+            case 'Nuevo':
+                $pqr_prox_estado = "En Proceso";
+                break;
+            case 'Proceso':
+                $pqr_prox_estado = "Cerrado";
+                break;
+            default:
+                $pqr_prox_estado = "Cerrado";
+                break;
+        }
     }
     
 
@@ -87,12 +98,9 @@ else{
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_estado:</span>
-                        <select class="form-control" name="pqr_estado" id="pqr_estado" required>
-                            <option value=<?php echo "'". $pqr_estado."'";?> selected><?php echo $pqr_estado; ?></option>
-                            <option value="Nuevo">Nuevo</option>
-                            <option value="Proceso">En proceso</option>
-                            <option value="Cerrado">Cerrado</option>
-                        </select>
+                        <input type="text" name="pqr_estado" class="form-control" required readonly value=<?php echo "'". $pqr_estado."'";?>>
+                        <span class="input-group-text col-sm-3">Pasa a:</span>
+                        <input type="text" name="pqr_prox_estado" class="form-control" required readonly value=<?php echo "'". $pqr_prox_estado."'";?>>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text col-sm-3">pqr_fecha_creado:</span>
@@ -103,7 +111,7 @@ else{
                         <input type="text" name="pqr_fecha_limite" class="form-control" required readonly value=<?php echo "'". $pqr_fecha_limite."'";?>>
                     </div>
                     <hr>
-                    <input class="btn btn-primary" id="submit" type="submit" value="Editar">
+                    <input class="btn btn-primary" id="submit" type="submit" value="Procesar">
                     <a href="/RegistroPQR/App/manager.php">
                         <button type="button" class="btn btn-warning">
                             Volver

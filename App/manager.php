@@ -3,7 +3,7 @@
 session_start();
 
 require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/pqrs.php");
-require_once("../Controladores/conexionBD.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Controladores/conexionBD.php");
 
 // Si se ha iniciado sesion se puede continuar
 if(isset($_SESSION['user']) && isset($_SESSION['id'])){
@@ -51,9 +51,27 @@ else{
 
 
     <div class="container">
-        <a href="/RegistroPQR/App/pqr/nueva_pqr.php">
-            <button class="btn btn-primary">+ Nueva PQR</button>
-        </a>
+        <div class="row justify-content-between">
+            <div class="col-sm-2">
+                <a href="/RegistroPQR/App/pqr/nueva_pqr.php">
+                    <button class="btn btn-primary">+ Nueva PQR</button>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm">
+                        <a href="/RegistroPQR/App/pqr/pqr_exportada-excel.php">
+                            <button class="btn btn-primary">Exportar->Excel</button>
+                        </a>
+                    </div>
+                    <div class="col-sm">
+                        <a href="/RegistroPQR/App/pqr/pqr_exportada-csv.php">
+                            <button class="btn btn-primary">Exportar->CSV</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -105,7 +123,7 @@ else{
                                             <form action='/RegistroPQR/App/pqr/editar_pqr.php' method='post'>
                                                 <input type='hidden' name='pqr_usuario_id' id='pqr_usuario_id' value='".$pqr_usuario_id."'>
                                                 <input type='hidden' name='pqr_id' id='pqr_id' value='".$pqr_id."'>
-                                                <input type='submit' class='btn btn-primary' value='Editar'>
+                                                <input type='submit' class='btn btn-primary' value='Procesar'>
                                             </form>
                                         </td>";
                     }

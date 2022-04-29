@@ -24,6 +24,7 @@ function crear(Pqr $pqr){
         $resultado = "Error: " . $e;
     }
     finally{
+        // $conexion->close();
         return $resultado;
     }
     
@@ -48,6 +49,7 @@ function buscar_pqr($pqr_usuario_id, $pqr_id){
     catch(Exception $e){
         $resultado = "Error: " . $e;
     }finally{
+        // $conexion->close();
         return $rows;
     }
 }
@@ -73,6 +75,7 @@ function buscar_pqrs($pqr_usuario_id){
     catch(Exception $e){
         $resultado = "Error: " . $e;
     }finally{
+        // $conexion->close();
         return $rows;
     }
 
@@ -80,7 +83,7 @@ function buscar_pqrs($pqr_usuario_id){
 
 function buscar_todas_pqrs(){
     global $conexion;
-
+    $rows = null;
     // trayendo los datos de la BD
     $query = $conexion->prepare("SELECT * FROM pqr;");
     try {
@@ -94,6 +97,7 @@ function buscar_todas_pqrs(){
     catch(Exception $e){
         $resultado = "Error: " . $e;
     }finally{
+        // $conexion->close();
         return $rows;
     }
 }
@@ -101,14 +105,12 @@ function buscar_todas_pqrs(){
 function actualizar(Pqr $pqr){
     global $conexion;
     $pqr_id = $pqr->get_id();
-    $pqr_tipo = $pqr->get_tipo();
-    $pqr_asunto = $pqr->get_asunto();
-    $pqr_texto = $pqr->get_texto();
+    $pqr_estado = $pqr->get_estado();
     
-    $sql = "UPDATE pqr SET  pqr_tipo= ? , pqr_asunto= ? , pqr_texto= ? WHERE pqr_id= ?;";
+    $sql = "UPDATE pqr SET  pqr_estado= ? WHERE pqr_id= ?;";
 
     $query = $conexion -> prepare($sql);
-    $query->bind_param("sssi", $pqr_tipo, $pqr_asunto, $pqr_texto, $pqr_id);
+    $query->bind_param("si", $pqr_estado, $pqr_id);
     $resultado = "";
     try {
         $query->execute();
@@ -117,6 +119,7 @@ function actualizar(Pqr $pqr){
         $resultado = "Error: " . $e;
     }
     finally{
+        // $conexion->close();
         return $resultado;
     }
 }
@@ -137,6 +140,7 @@ function borrar(Pqr $pqr){
         $resultado = "Error: " . $e;
     }
     finally{
+        // $conexion->close();
         return $resultado;
     }
 }

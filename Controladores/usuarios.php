@@ -92,6 +92,21 @@ function actualizar_usuario(Usuario $usuario){
         return $resultado;
     }
 }
-function borrar(){
-    
+function borrar_usuario(Usuario $usuario){
+    global $conexion;
+    $usuario_id = $usuario->get_id();
+
+    $sql = "DELETE FROM usuarios WHERE usuario_id = ?";
+    $query = $conexion->prepare($sql);
+    $query->bind_param("i", $usuario_id);
+    $resultado = "";
+    try {
+        $query->execute();
+        $resultado = "Eliminacion de Usuario exitosa";
+    } catch (Exception $e) {
+        $resultado = "Error: " . $e;
+    }
+    finally{
+        return $resultado;
+    }
 }

@@ -36,7 +36,6 @@
     <!-- termina la barra de navegacion -->
     <div class="container">
 
-
         <div class="row justify-content-center my-4">
             <div class="col-sm-10">
                 <form action="./registrado.php" method="post">

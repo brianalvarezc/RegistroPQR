@@ -25,12 +25,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['id'])){
         $boton = '  <a href="/RegistroPQR/App/Usuarios/nuevo_usuario.php">
                         <button class="btn btn-primary">+ Nuevo Usuario</button>
                     </a>';
-        $boton_eliminar = "<td>
-                            <form action='/RegistroPQR/App/usuarios/borrar_usuario.php' method='post'>
-                                <input type='hidden' name='usuario_id' id='usuario_id' value='".$usuario_id."'>
-                                <input type='submit' class='btn btn-danger' value='Borrar'>
-                            </form>
-                            </td>";
+        
         $th_eliminar = "<th>Eliminar</th>";
     }
 }
@@ -59,6 +54,7 @@ else{
 
     <div class="container">
         
+    <!-- boton que se muestra si es usuario admin -->
     <?php echo $boton; ?>
 
         <table class="table">
@@ -93,16 +89,27 @@ else{
                     echo "<td>". $usuario_telefono . "</td>";
                     echo "<td>". $usuario_admin . "</td>";
                     
+                    
                     // boton de formulario para editar
                     echo "<td>
-                        <form action='/RegistroPQR/App/usuarios/editar_usuario.php' method='post'>
-                            <input type='hidden' name='usuario_id' id='usuario_id' value='".$usuario_id."'>
-                            <input type='submit' class='btn btn-primary' value='Editar'>
-                            </form>
-                            </td>";
-                            
-                            // boton de formulario para borrar
-                            echo $boton_eliminar;
+                    <form action='/RegistroPQR/App/usuarios/editar_usuario.php' method='post'>
+                    <input type='hidden' name='usuario_id' id='usuario_id' value='".$usuario_id."'>
+                    <input type='submit' class='btn btn-primary' value='Editar'>
+                    </form>
+                    </td>";
+                    
+                    // boton de formulario para borrar
+                    if($_SESSION['admin'] == "Si"){
+                        $boton_eliminar = "<td>
+                                <form action='/RegistroPQR/App/usuarios/borrar_usuario.php' method='post'>
+                                    <input type='hidden' name='usuario_id' id='usuario_id' value='".$usuario_id."'>
+                                    <input type='submit' class='btn btn-danger' value='Borrar'>
+                                </form>
+                                </td>";
+                    }else{
+                        $boton_eliminar = "";
+                    }
+                    echo $boton_eliminar;
 
                     echo "</tr>";
                 } ?>

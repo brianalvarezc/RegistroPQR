@@ -1,4 +1,5 @@
 <?php
+session_start();
     require_once($_SERVER['DOCUMENT_ROOT']."/RegistroPQR/Modelos/pqrs.php");
     
     $pqr_id = $_POST['pqr_id'];
@@ -29,6 +30,10 @@
     <title>Eliminar PQR</title>
 </head>
 <body>
+    
+<?php require_once($_SERVER["DOCUMENT_ROOT"]."/RegistroPQR/App/navbar.php") ?>
+    <!-- termina la barra de navegacion -->
+
     <div class="container">
         <div class="row justify-content-center my-4">
             <div class="col-sm-10">

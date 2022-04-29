@@ -25,6 +25,7 @@ class Pqr {
     
     // setters
     function set_id($pqr_id){$this->pqr_id = $pqr_id;}
+    function set_estado($pqr_estado){$this->pqr_estado = $pqr_estado;}
 
     // metodos
     function crear(){
